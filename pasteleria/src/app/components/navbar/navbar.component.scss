@@ -1,7 +1,9 @@
+@import '../../../styles.scss';
+
 .navbar{
     display:flex;
     justify-content:space-between;
-    background-color:#CBDA93;
+    background-color:$verde-claro;
 }
 .navbar ul {
    list-style: none;

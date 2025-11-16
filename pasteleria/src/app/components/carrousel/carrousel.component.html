@@ -1,0 +1,16 @@
+<div class="carrousel" 
+     (mouseenter)="onMouseEnter()" 
+     (mouseleave)="onMouseLeave()">
+  <button class="arrow left" (click)="scrollLeft()">
+    <i class="bi bi-arrow-left"></i>
+  </button>
+
+  <div #scrollContainer class="scroll-container">
+    <ng-content select="[slideItem]"></ng-content>
+  </div>
+
+  <button class="arrow right" (click)="scrollRight()">
+    <i class="bi bi-arrow-right"></i>
+  </button>
+
+</div>
