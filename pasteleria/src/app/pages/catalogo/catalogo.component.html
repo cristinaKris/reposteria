@@ -7,60 +7,64 @@
     <p>Dscubre nuestras creaciones hechas con amor y los mejores ingredientes.<br>
       <br>  Elige, combina y disfruta — ¡cada bocado es una fiesta de sabor!
     </p>
-    <div class="imagenes">
         <img src="assets/img/tiramisu.png" alt="Decoración">
         <img src="assets/img/panes.png" alt="Hojas">
         <img src="assets/img/pasteles.png" alt="Línea decorativa">
-    </div>
 </div>
-<!-- <img src="assets/img/catalogo.png" alt="Tarta de Kiwi" class="product-image"> -->
+
+
+
+
+
+<h1>Tartas</h1>
 <app-carrousel>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
+  <div slideItem *ngFor="let tarta of tartas">
+    <app-product-card
+      [name]="tarta.name"
+      [price]="tarta.price"
+      [descripcion]="tarta.description"
+      [imagen]="tarta.img"
+    >
+    </app-product-card>
   </div>
+</app-carrousel>
 
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-  </div>
-  <div slideItem>
-    <app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
+<h1>Panes</h1>
+<app-carrousel>
+  <div slideItem *ngFor="let pan of panes">
+    <app-product-card
+      [name] = "pan.name"
+      [descripcion] = "pan.description"
+      [price] = "pan.price"
+      [imagen] = "pan.img"
+    >
+    </app-product-card>
   </div>
 </app-carrousel>
 
 
-<app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-<app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-<app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-<app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
-<app-product-card [name]="'Tarta de Kiwi'" [price]="9.99"></app-product-card>
+<h1>Postres</h1>
+<app-carrousel>
+  <div slideItem *ngFor="let postre of postres">
+    <app-product-card
+      [name]="postre.name"
+      [descripcion] = "postre.description"
+      [price] = "postre.price"
+      [imagen] = "postre.imagen"
+    >
+    </app-product-card>
+  </div>
+</app-carrousel>
+
+<h1>Pasteles</h1>
+<app-carrousel>
+  <div slideItem *ngFor="let pastel of pasteles">
+    <app-product-card
+      [name] = "pastel.name"
+      [descripcion] = "pastel.description"
+      [price] = "pastel.price"
+      [imagen] = "pastel.img" 
+    ></app-product-card>
+  </div>
+</app-carrousel>
+

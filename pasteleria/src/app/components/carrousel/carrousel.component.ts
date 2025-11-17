@@ -23,7 +23,7 @@ export class CarrouselComponent implements AfterViewInit {
 
   startAutoScroll() {
     this.stopAutoScroll();
-    this.timer = setInterval(() => {
+    this.timer = setInterval(() => {//Guarda identificador del intervalo
       if (!this.pauseOnHover || !this.hover) {
         this.scrollRight();
       }
@@ -35,13 +35,19 @@ export class CarrouselComponent implements AfterViewInit {
   }
 
   scrollRight() {
-    const el = this.scrollContainer.nativeElement;
-    el.scrollLeft += 250;
+    const sc = this.scrollContainer.nativeElement;
+    sc.scrollLeft += 325;
+    if (sc.scrollLeft + sc.clientWidth >= sc.scrollWidth) {
+      sc.scrollLeft = 0;
+    }
   }
 
   scrollLeft() {
-    const el = this.scrollContainer.nativeElement;
-    el.scrollLeft -= 250;
+    const sc = this.scrollContainer.nativeElement;
+    sc.scrollLeft -= 325;
+    if (sc.scrollLeft <= 0) {
+      sc.scrollLeft = sc.scrollWidth - sc.clientWidth;
+    }
   }
 
   onMouseEnter() { this.hover = true; }

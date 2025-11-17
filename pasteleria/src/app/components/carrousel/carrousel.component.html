@@ -1,3 +1,16 @@
+<!-- Genera el comportamiento de carrousel puedes poner dentro lo que quieras
+Puedes elegir mostrar las fechas y si se detenie al colocar el mouse encima
+Se usa como:
+
+<app-carrousel [pauseOnHover]="true"
+             [showArrows]="true">
+  <div slideItem *ngFor="let item of items">
+    Contenido del slide
+  </div>
+</app-carrousel> 
+
+-->
+
 <div class="carrousel" 
      (mouseenter)="onMouseEnter()" 
      (mouseleave)="onMouseLeave()">

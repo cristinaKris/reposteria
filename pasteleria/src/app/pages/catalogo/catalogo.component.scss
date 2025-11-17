@@ -14,7 +14,8 @@
   position: absolute;       
   top: 60%;                 
   left: 10%;  
-  padding: 10px 30px; 
+  padding: 0px 30px;
+  //margin-bottom: 40px ; 
   border-radius: 25px;
   background-color: $verde-claro;      
   color: black;             
@@ -23,30 +24,30 @@
 }
 
 .container {
-  display: grid;
-  grid-template-columns: 250px 1fr; /* Texto | imágenes */
-  grid-auto-rows: auto;             /* Filas se ajustan al contenido */
-  align-items: center;              /* Centra verticalmente el texto respecto a las filas de imágenes */
-  gap: 20px;                        /* Espacio entre texto e imágenes */
-  margin: 20px;
+  width: 100%;            /* Ocupar todo el ancho */
+  display: flex;          /* Activar flexbox */
+  flex-direction: row; /* Texto arriba, imágenes abajo */
+  align-items: center;    /* Centrar contenido */
+  text-align: center;     /* Centrar texto */
+  padding: 20px;
+  gap: 30px;
 }
 
-.container p {
-  margin: 0;
-  font-size: 16px;
+.container img {
+  //width: 100%;            /* Cada imagen ocupa todo el ancho disponible */
+  max-width: 20%;       /* Tamaño máximo para que no se deformen */
+  margin: 10px;
+  object-fit: contain;
 }
 
-.imagenes {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Imágenes grandes y responsive */
-  gap: 20px;
-}
-
-.imagenes img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px;
+.container p{
+  text-align: left;
 }
 
 
+h1{
+  text-align: left;
+  font-weight: 550;
+  padding: 0px 40px;
+  margin: 10px 0px 0px 0px;
+}

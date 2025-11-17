@@ -1,1 +1,239 @@
-<p>carrito works!</p>
+<div class="productos" *ngIf="mostrarProductos">
+    <h1 class="carrito">Tu carrito</h1>
+    <div class="container">
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let p of productos">
+                    <td><img [src]="p.imagen" width="70"></td>
+                    <td>{{p.nombre}}</td>
+                    <td>{{p.precio | currency:'MXN'}}</td>
+                    <td>
+                        <div class="cantidad">
+                            <button (click)="removeUnit(p.id)" [disabled]="p.cantidad === 0" class="btn-cantidad">-</button>
+                                {{p.cantidad}}
+                            <button (click)="addUnit(p.id)" class="btn-cantidad">+</button>
+                        </div>
+                        <button class="btn-eliminar" (click)="eliminar()">Eliminar</button>
+                        
+                    </td>
+                    <td>{{ subtotal(p.precio, p.cantidad) | currency:'MXN' }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <p> Total. {{calculaTotal()}}</p>
+    </div>
+    <div class="botones">
+        <button class="btn-cupon">Aplicar Cupón</button>
+        <button class="btn-pagar" (click)="iniciarPago()">Pagar</button>
+    </div>
+</div>
+
+<div *ngIf="!mostrarProductos">
+<app-asistente-pasos #asistente [pasos]="pasos" [pasoActual]="pasoActual" (pasoCambiado)="cambiarPaso($event)" [desplazamiento]="false">
+    <div class="form-container" *ngIf="pasoActual === 1">
+    <div class="card shadow p-4">
+        <h2 class="card-title mb-4 text-center">Registro de Datos</h2>
+        
+        <form #formDatos="ngForm" (ngSubmit)="guardar(formDatos)">
+        
+    
+        
+        <!-- Fecha -->
+        <div class="mb-3">
+            <label class="form-label">Fecha:</label>
+            <input type="date"
+                name="fecha"
+                class="form-control"
+                required
+                [(ngModel)]="datos.fecha">
+        </div>
+        
+        <!-- Botón Guardar -->
+        <button class="btn btn-primary w-100 mb-3" 
+                type="submit" 
+                [disabled]="formDatos.invalid">
+            Guardar
+        </button>
+        </form>
+    </div>
+    </div>
+
+    <div *ngIf="pasoActual===2" class="eleccion">
+        <h1>Selecciona tu forma de entrega</h1>
+        <button  (click)="pickUp()" class="boton1"><i class="bi bi-shop"></i> Pick Up</button>
+        <button (click)="domicilio()" class="boton2"><i class="bi bi-truck"></i>Envio Domicilo</button>
+    </div>
+    <div *ngIf="pasoActual===3" class="eleccion">
+  <h2 class="titulo-eleccion mb-4 text-center">Selecciona tu método de pago</h2>
+
+  <!-- Botones de elección de método -->
+  <div *ngIf="!eleccionMP && !eleccionPaypal" class="btn-eleccionPago d-flex justify-content-center gap-3 mb-4">
+    <button (click)="eleccionPaypal=true" class="boton-opcion">
+      <i class="bi bi-paypal fs-2 mb-2"></i>
+      <span>PayPal</span>
+    </button>
+    <button (click)="eleccionMP=true" class="boton-opcion">
+      <i class="bi bi-credit-card fs-2 mb-2"></i>
+      <span>Mercado Pago</span>
+    </button>
+  </div>
+
+  <!-- Formulario PayPal -->
+  <div *ngIf="eleccionPaypal" class="datosPago card shadow p-4">
+    <h3 class="mb-3">Datos del cliente - PayPal</h3>
+    <form #paypalForm="ngForm">
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Nombre</label>
+        <input type="text" name="nombre" ngModel class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Apellido</label>
+        <input type="text" name="apellido" ngModel class="form-control">
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-primary" (click)="pagarPaypal(paypalForm.value)">
+          Pagar con PayPal
+        </button>
+        <button type="button" class="btn btn-outline-secondary" (click)="cambiarPaso(4)">Siguiente</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Formulario MercadoPago -->
+  <div *ngIf="eleccionMP" class="datosPago card shadow p-4">
+    <h3 class="mb-3">Datos del cliente - MercadoPago</h3>
+    <form #mpForm="ngForm">
+      <div class="mb-3">
+        <label>Nombre</label>
+        <input type="text" name="nombre" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Apellido</label>
+        <input type="text" name="apellido" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Teléfono</label>
+        <input type="text" name="telefono" ngModel class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Tipo de documento</label>
+        <select name="tipoDocumento" ngModel required class="form-select">
+          <option value="INE">INE</option>
+          <option value="CURP">CURP</option>
+          <option value="PASSPORT">Pasaporte</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label>Número de documento</label>
+        <input type="text" name="documento" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Dirección</label>
+        <input type="text" name="direccion" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Código Postal</label>
+        <input type="text" name="cp" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>Ciudad</label>
+        <input type="text" name="ciudad" ngModel required class="form-control">
+      </div>
+      <div class="mb-3">
+        <label>País</label>
+        <input type="text" name="pais" ngModel required class="form-control">
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-primary" (click)="pagarMP(mpForm.value)">
+          Pagar con MercadoPago
+        </button>
+        <button type="button" class="btn btn-outline-secondary" (click)="cambiarPaso(4)">Siguiente</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    <div *ngIf="pasoActual===4" class="resumen">
+        <div class="container">
+            <h2>Productos:</h2>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of productos">
+                        <td>{{p.nombre}}</td>
+                        <td>{{p.cantidad}}</td>
+                        <td>{{ subtotal(p.precio, p.cantidad) | currency:'MXN' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p> Total: {{calculaTotal()}}</p>
+        </div>
+        <div>
+            <h2>Método de entrega:</h2>
+            <div *ngIf="eleccionPickUp" class="resumenEntrega">
+                <p>Pick Up</p>
+            </div>
+            <div *ngIf="eleccionDomicilio" class="resumenEntrega">
+                <p>Domicilio</p>
+                <p>Dirección: </p>
+            </div>
+        </div>
+        <div>
+            <h2>Método de pago:</h2>
+            <div *ngIf="eleccionPaypal" class="resumenPaypal">
+                <p>Paypal</p>>
+            </div>
+            <div *ngIf="eleccionMP" class="resumenPaypal">
+                <p>Mercado Pago</p>
+            </div>
+        </div>
+        <button (click)="confirmar()" class="btn-confirmar">Confirmar compra</button>
+    </div>
+    <div *ngIf="pasoActual===5" class="eleccion">
+        <h1>Seguimiento</h1>
+        <div class="stepper">
+            <div *ngFor="let paso of status; let i = index"
+                class="step"
+                [class.activo]="i === statusActivo"
+                [class.completado]="i < statusActivo">
+                {{ paso }}
+            </div>
+        </div>
+
+    </div>
+
+    
+
+
+
+</app-asistente-pasos>
+</div>
+
+<!-- Asistente -->
+
+
