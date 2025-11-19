@@ -138,14 +138,14 @@ export class CarritoComponent {
 
   pagarPaypal(datosCliente: any) {
     console.log("Datos enviados a PayPal:", datosCliente);
-
+    this.cambiarPaso(4);
     // Aquí llamas a tu backend para crear la orden de PayPal
     // this.apiService.crearOrdenPaypal(datosCliente).subscribe(...)
   }
 
   pagarMP(datosCliente: any) {
     console.log("Datos enviados a MercadoPago:", datosCliente);
-
+    this.cambiarPaso(4);
     // Aquí llamas a tu backend para crear la preferencia de MercadoPago
     // this.apiService.crearPreferenciaMP(datosCliente).subscribe(...)
   }

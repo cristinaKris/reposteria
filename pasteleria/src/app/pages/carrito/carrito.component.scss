@@ -59,7 +59,6 @@
 }
 
 .cantidad{
-  //display: flex;  
   flex-wrap: wrap;
 }
 
@@ -98,109 +97,95 @@
   align-items: center;
   padding: 20px 20px;
   gap: 50px;
+
+  .btn2{
+    background-color: $rosa-pastel;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 20px;
+  }
+
+  .btn2:hover{
+    filter: brightness(93%);
+  }
+
+  .btn1{
+    background-color: $verde-claro;
+    color: black;
+    border: none;
+    border-radius:50px;
+    padding: 10px 30px;
+    font-size: 20px
+  }
+
+  .btn1:hover{
+    filter: brightness(93%);
+  }
 }
-
-.botones .btn-cupon{
-  background-color: $rosa-pastel;
-  color: black;
-  border: none;
-  border-radius: 50px;
-  padding: 10px 30px;
-  font-size: 20px;
-}
-
-.botones .btn-cupon:hover{
-  filter: brightness(93%);
-}
-
-.botones .btn-pagar{
-  background-color: $verde-claro;
-  color: black;
-  border: none;
-  border-radius:50px;
-  padding: 10px 40px;
-  font-size: 25px
-}
-
-.botones .btn-pagar:hover{
-  filter: brightness(93%);
-}
-
-/////////Paso 1
-
 
 .form-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-top: 40px;
+  background: #fefefe;
+  padding: 5px 20px 5px 20px; 
+  border-radius: 0.5rem;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); 
+  width: 50%;
+  margin: 20px auto;
 
-  .card {
-    width: 70%;
-    border-radius: 12px;
-    background-color: #faf9f7;
-    
-    .card-title {
-      color: $rosa-intenso;
-      font-size: 35px;
-      margin: 20px auto;
-    }
+  .form-label{
+    font-size: 18px;
+    font-weight:300;
+    padding: 5px;
+  }
 
-    .form-control {
-      border-radius: 8px;
-      padding: 10px;
-      margin: 20px auto;
-      
-    }
-    
+  .form-control {
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px auto;
+  }
 
-    .btn {
-      border-radius: 20px;
-      background-color: $verde-claro;
-      color:black;
-      font-weight: 500;
-      border: none;
-      padding: 10px 20px;
-      margin: 20px auto;
-    }
+  h2{
+    text-align: center;
+    padding: 15px;
+    color: $rosa-intenso;
   }
 }
-////Paso 2
+
 .eleccion{
   align-items: center;
   justify-content: center;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  .boton1{
+    flex-direction: column;
+    font-size: 25px;
+    width: 70%;
+    background-color: $rosa-morado;
+    padding: 30px 30px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin: 20px 0px 20px 0px;
+  } 
+
+  .boton2{
+    flex-direction: column;
+    font-size: 25px;
+    width: 70%;
+    background-color: white;
+    padding: 30px 30px;
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    margin: 20px 0px 20px 0px;
+  } 
 }
-
-.eleccion .boton1{
-  flex-direction: column;
-  font-size: 25px;
-  width: 70%;
-  background-color: $rosa-morado;
-  padding: 30px 30px;
-  //gap: 20px;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  margin: 20px 0px 20px 0px;
-} 
-
-.eleccion .boton2{
-  flex-direction: column;
-  font-size: 25px;
-  width: 70%;
-  background-color: white;
-  padding: 30px 30px;
-  //gap: 20px;
-  
-  color: rgb(0, 0, 0);
-  border-radius: 20px;
-  margin: 20px 0px 20px 0px;
-
-} 
-
-
 
 ////////////////////////Seguimeinto pedidos
 .stepper {
@@ -219,85 +204,25 @@
   height: 100px;
   border: $rosa-morado;
   border-radius: 10px;
-  background-color: $rosa-pastel; // color de pasos no activos
-  transform: skewX(-20deg); // para darle la forma de paralelogramo
+  background-color: $rosa-pastel; 
+  transform: skewX(-20deg);
   color: #000;
   transition: all 0.3s ease;
 }
 
 .step.activo {
-  background-color: #d6f596; // color del paso activo
+  background-color: #d6f596;
   font-weight: bold;
 }
 
 .step.completado {
-  background-color: $rosa-pastel; // color de pasos completados
+  background-color: $rosa-pastel;
   color: black;
 }
 
 .step span {
   display: inline-block;
-  transform: skewX(20deg); // para que el texto no se incline
-}
-
-/////////////////////////////////////////
-/// 
-/// 
-.eleccion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-
-  .titulo-eleccion {
-    color: #d63384;
-  }
-
-  .btn-eleccionPago {
-    display: flex;
-    gap: 20px;
-
-    .boton-opcion {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 160px;
-      height: 120px;
-      border-radius: 15px;
-      border: none;
-      background: #ffe6f0;
-      color: #d63384;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-
-      i {
-        margin-bottom: 8px;
-      }
-
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        background: #f7cbe0;
-      }
-    }
-  }
-
-  .datosPago {
-    width: 400px;
-    margin-top: 20px;
-
-    .form-control, .form-select {
-      border-radius: 8px;
-      padding: 8px;
-    }
-
-    .btn {
-      border-radius: 8px;
-    }
-  }
+  transform: skewX(20deg); 
 }
 
 .resumen{
@@ -306,21 +231,18 @@
   align-items: center;
   text-align: center;
   gap:20px;
-}
 
-.resumen h2{
-  color: $rosa-fuerte;
-}
+  h2{
+    color: $rosa-fuerte;
+  }
 
-.resumen button{
-  font-size: 20px;
-  //width: 50%;
-  background-color: $verde-claro;
-  border: none;
-  padding: 10px 30px;
-  //gap: 20px;
-  
-  color: rgb(0, 0, 0);
-  border-radius: 20px;
-  margin: 20px 0px 20px 0px;
+  button{
+    font-size: 20px;
+    background-color: $verde-claro;
+    border: none;
+    padding: 10px 30px;
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    margin: 20px 0px 20px 0px;
+  }
 }
