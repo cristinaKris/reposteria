@@ -2,15 +2,20 @@ import { Component } from '@angular/core';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { CarrouselComponent } from '../../components/carrousel/carrousel.component';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PersonalizarPastelComponent } from './personalizar-pastel/personalizar-pastel.component';
 
 @Component({
   selector: 'app-catalogo',
   standalone:true,
-  imports: [ProductCardComponent, CommonModule,CarrouselComponent],
+  imports: [ProductCardComponent, CommonModule,CarrouselComponent,RouterModule],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.scss'
 })
 export class CatalogoComponent {
+  constructor (private dialog:MatDialog){};
   panes: { name: string; description: string; price: number; img: string }[] = [
   { name: "Avellana", description: "Pan suave con avellanas tostadas, sabor delicado y textura ligeramente crujiente.", price: 110, img: "assets/img/panes/avellana.jpg" },
   { name: "Centeno Negro", description: "Pan denso de centeno con sabor profundo y ligeramente ácido.", price: 95, img: "assets/img/panes/centenoNegro.jpg" },
@@ -221,6 +226,14 @@ postres = [
     imagen: 'assets/img/postres/zanahoria.jpg'
   }
 ];
+personalizar() {
+  this.dialog.open(PersonalizarPastelComponent, {
+    panelClass: 'dialog-fullscreen',
+    data: {},
+    disableClose: false
+  });
+}
+
 
 
 }

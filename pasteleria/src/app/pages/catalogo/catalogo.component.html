@@ -12,10 +12,6 @@
         <img src="assets/img/pasteles.png" alt="Línea decorativa">
 </div>
 
-
-
-
-
 <h1>Tartas</h1>
 <app-carrousel>
   <div slideItem *ngFor="let tarta of tartas">
@@ -56,7 +52,13 @@
   </div>
 </app-carrousel>
 
-<h1>Pasteles</h1>
+<div class="pasteles">
+  <h1>Pasteles</h1>
+  <button (click)="personalizar()" class="btn" type="button">
+    Personalizado
+  </button>
+</div>
+
 <app-carrousel>
   <div slideItem *ngFor="let pastel of pasteles">
     <app-product-card
@@ -67,4 +69,3 @@
     ></app-product-card>
   </div>
 </app-carrousel>
-
