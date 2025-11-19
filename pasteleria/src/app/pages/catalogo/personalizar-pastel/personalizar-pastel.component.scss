@@ -5,7 +5,6 @@
     padding: 20px 10px;
 }
 
-/* Botón cancelar */
 .botones {
   display: flex;
   justify-content: flex-end;
@@ -54,7 +53,7 @@
 /* Título encima */
 .titulo {
   position: relative;
-  z-index: 2;                  /* Por encima */
+  z-index: 2;                  
   font-size: 60px;
   font-weight: 800;
   color: black;
@@ -62,7 +61,6 @@
   //margin-bottom: 20px;
 }
 
-/* Subtítulo encima */
 .subtitulo {
   position: relative;
   z-index: 2;
@@ -75,7 +73,6 @@
   line-height: 1.6;
 }
 
-/* Botón encima */
 .btn-comenzar {
 
   position: relative;
@@ -98,7 +95,6 @@
   box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Animación */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
@@ -168,7 +164,6 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Animación suave */
 @keyframes fade {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
