@@ -228,7 +228,11 @@ postres = [
 ];
 personalizar() {
   this.dialog.open(PersonalizarPastelComponent, {
+    width: '90vw',
+    height: '90vh',
     panelClass: 'dialog-fullscreen',
+    maxWidth: '90vw',
+    maxHeight: '90vh',
     data: {},
     disableClose: false
   });
