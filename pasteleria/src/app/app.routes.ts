@@ -5,6 +5,8 @@ import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 import { ClienteComponent } from './pages/cliente/cliente.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { PersonalizarPastelComponent } from './pages/catalogo/personalizar-pastel/personalizar-pastel.component';
+import { MiPerfilComponent } from './pages/cliente/mi-perfil/mi-perfil.component';
+
 
 export const routes: Routes = [
      { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,9 +27,38 @@ export const routes: Routes = [
     ),
     },
 
+    { path: 'perfil',
+        loadComponent: () =>
+    import('./pages/cliente/mi-perfil/mi-perfil.component').then(
+      (m) => m.MiPerfilComponent 
+    ),
+    },
+
+    { path: 'actualizar',
+        loadComponent: () =>
+    import('./pages/cliente/actualizar-datos/actualizar-datos.component').then(
+      (m) => m.ActualizarDatosComponent 
+    ),
+    },
+
+    { path: 'pedidos',
+        loadComponent: () =>
+    import('./pages/cliente/mis-pedidos/mis-pedidos.component').then(
+      (m) => m.MisPedidosComponent 
+    ),
+    },
+
+    { path: 'puntos',
+        loadComponent: () =>
+    import('./pages/cliente/puntos/puntos.component').then(
+      (m) => m.PuntosComponent 
+    ),
+    },
+
     {path: 'cliente', component: ClienteComponent},
     //{ path: 'personalizar-pastel', component: PersonalizarPastelComponent, },
     {path: 'carrito', component: CarritoComponent},
     {path: '**', redirectTo: '/home'}
+
 
 ];

@@ -30,9 +30,9 @@
 
     <!-- Si está logeado → menú -->
     <div *ngIf="isLoggedIn">
-      <button class="login-btn" routerLink="/perfil">Mi perfil</button>
-      <button class="login-btn" routerLink="/pedidos">Mis pedidos</button>
-      <button class="login-btn" routerLink="/puntos">Puntos</button>
+      <button class="login-btn" [routerLink]="'/perfil'" (click)="closeModal()">Mi perfil</button>
+      <button class="login-btn" [routerLink]="'/pedidos'" (click)="closeModal()">Mis pedidos</button>
+      <button class="login-btn" [routerLink]="'/puntos'" (click)="closeModal()">Puntos</button>
 
       <button class="login-button" (click)="cerrarSesion()">Cerrar sesión</button>
     </div>

@@ -1,14 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cliente',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './cliente.component.html',
-  styleUrl: './cliente.component.scss'
+  styleUrls: ['./cliente.component.scss']
 })
 export class ClienteComponent {
 
