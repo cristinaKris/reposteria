@@ -16,8 +16,18 @@ export const routes: Routes = [
             { path: 'personalizar-pastel', component: PersonalizarPastelComponent }
         ]
     },
+
+    {
+     path: 'registro',
+     loadComponent: () =>
+    import('./pages/cliente/crear-cuenta/crear-cuenta.component').then(
+      (m) => m.CrearCuentaComponent
+    ),
+    },
+
     {path: 'cliente', component: ClienteComponent},
     //{ path: 'personalizar-pastel', component: PersonalizarPastelComponent, },
     {path: 'carrito', component: CarritoComponent},
     {path: '**', redirectTo: '/home'}
+
 ];
