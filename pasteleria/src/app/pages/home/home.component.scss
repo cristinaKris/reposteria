@@ -1,3 +1,85 @@
 @import '../../../styles.scss';
-//con import revisen styles.scss y ya estan los colores predefinidos para susarlos ponen 
-//Por ejemplo: background-color: $nombre-color
+
+.hero-container {
+  position: relative;
+  width: 100%;
+}
+
+.principal-image {
+  width: 100%;
+  height: auto;
+}
+
+.hero-title {
+  position: absolute;
+  top: 60%;
+  left: 10%;
+  padding: 0px 30px;
+  border-radius: 25px;
+  background-color: $verde-claro;
+  color: black;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  gap: 30px;
+}
+
+.container img {
+  max-width: 20%;
+  margin: 10px;
+  object-fit: contain;
+}
+
+.container p {
+  text-align: left;
+}
+
+h1 {
+  text-align: left;
+  font-weight: 550;
+  padding: 0px 40px;
+  margin: 10px 0px 0px 0px;
+}
+
+.discount-banner {
+  background-color: #9c4d9e; /* Color del fondo */
+  color: white;
+  text-align: center;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.discount-banner h1 {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.discount-banner p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.btn-discount {
+  background-color: #a5e08e; /* Color verde del botón */
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-discount:hover {
+  background-color: #88c075; /* Color verde más oscuro al pasar el mouse */
+}
