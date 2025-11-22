@@ -1,22 +1,21 @@
-<div class="botones">
-  <button (click)="onClose()" class="btn-cancelar">Cancelar</button>
-</div>
+<button class="btn-cancelar" (click)="onClose()">
+                <i class="bi bi-x-circle"></i> Salir
+            </button>
 
 <div *ngIf="!asistente" class="inicio-container">
-  
+
   <img class="fondo" [src]="imagen">
 
-  <h1 class="titulo">Personalización de Pasteles</h1>
-
-  <p class="subtitulo">
-    "Tu pastel, tu historia: Diseña, personaliza y disfruta.  
-    <br>El pastel de tus sueños hecho realidad."
-  </p>
-
-  <button class="btn-comenzar" (click)="asistente = true">
-    Comenzar
-  </button>
-
+  <div class="contenido-inicial">
+    <h1 class="titulo">Personalización de Pasteles</h1>
+    <button class="btn-comenzar" (click)="asistente = true">
+      Comenzar
+    </button>
+    <!-- <p class="subtitulo">
+      "Tu pastel, tu historia: Diseña, personaliza y disfruta.  
+      <br>El pastel de tus sueños hecho realidad."
+    </p> -->
+  </div>
 </div>
 
 <div *ngIf="asistente" class="container">
@@ -36,7 +35,7 @@
 
             <div class="opciones">
                 <button (click)="sabor(sab)" class="opcion" *ngFor="let sab of sabores">
-                    <i class="bi bi-hypnotized"></i>
+                    <i class="bi bi-heart-arrow"></i>
                     <span>{{ sab }}</span>
                 </button>
             </div>
@@ -56,10 +55,42 @@
             <h2>Seleccionar relleno</h2>
             <div class="opciones">
                 <button (click)="decoracion(dec)" class = "opcion" *ngFor="let dec of decoraciones">
-                    <i class="bi bi-flower1"></i>
+                    <i class="bi bi-hypnotize"></i>
                     <span>{{dec}}</span>
                 </button> 
             </div>
         </div>
+       
+        <div class="paso" *ngIf="pasoActual==5">
+            <h2>Resumen de tu pastel</h2>
+            <div class="opciones">
+                <button class = "item" (click)="cambiarPaso(1)">
+                    <i class="bi bi-heart-arrow"></i>
+                    <span>{{pastel.size}}</span>
+                </button> 
+                <button class = "item">
+                    <i class="bi bi-heart-arrow" (click)="cambiarPaso(2)"></i>
+                    <span>{{pastel.sabor}}</span>
+                </button> 
+                <button class = "item">
+                    <i class="bi bi-heart-arrow" (click)="cambiarPaso(3)"></i>
+                    <span>{{pastel.relleno}}</span>
+                </button> 
+                <button class = "item">
+                    <i class="bi bi-heart-arrow" (click)="cambiarPaso(4)"></i>
+                    <span>{{pastel.decoracion}}</span>
+                </button> 
+            </div>
+            
+            <div class="resumen-botones">
+            <button class="btn-comenzar" (click)="finalizar()">
+                <i class="bi bi-check-circle"></i> Confirmar
+            </button>
+            
+            </div>
+        </div>
+
+
+
     </app-asistente-pasos>
 </div>
