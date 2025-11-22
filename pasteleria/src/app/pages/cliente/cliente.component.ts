@@ -55,6 +55,7 @@ export class ClienteComponent {
       this.isLoggedIn = true;
     } else {
       this.errorMessage = 'Usuario o contraseña incorrectos';
+      const confirmacion = window.confirm(' Usuario o contraseña incorrecta');
     }
   }
   logoutt() {
