@@ -1,28 +1,18 @@
 import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AsistentePasosComponent } from '../../components/asistente-pasos/asistente-pasos.component';
+import { AsistentePasosComponent } from '../../../components/asistente-pasos/asistente-pasos.component';
 import { FormsModule } from '@angular/forms';
-import { Pedido } from '../../models/pedido';
-import {Producto}  from '../../models/producto';
-import { AuthService } from '../../services/auth.service';
-
-import { Router } from '@angular/router';
+import { Pedido } from '../../../models/pedido';
+import {Producto}  from '../../../models/producto';
 
 @Component({
-  selector: 'app-carrito',
+  selector: 'app-productos',
   imports: [CommonModule,AsistentePasosComponent, FormsModule],
-  templateUrl: './carrito.component.html',
-  styleUrl: './carrito.component.scss'
+  templateUrl: './productos.component.html',
+  styleUrl: './productos.component.scss'
 })
-export class CarritoComponent {
-  constructor(private router: Router, private auth: AuthService) {}
-  login=false;
-  ngOnInit(){
-    this.login=this.auth.isLoggedIn();
-    console.log(this.login)
-    if(this.login==false){this.router.navigate(['/cliente']);}
-   }
-  productosList = [
+export class ProductosComponent {
+productosList = [
     { 
       id: 1,
       nombre: 'Tarta de Kiwi', 
@@ -197,3 +187,4 @@ export class CarritoComponent {
   }
 
 }
+
