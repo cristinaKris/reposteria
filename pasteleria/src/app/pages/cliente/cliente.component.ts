@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-cliente',
   standalone: true,
@@ -23,13 +23,14 @@ export class ClienteComponent {
 
   username: string = '';
   password: string = '';
+  errorMessage: string = '';
 
   closeModal() {
     this.close.emit(); // ← Notifica al app.component.html que debe cerrar
   }
 
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private auth: AuthService) {}
 
   irCrearCuenta() {
   this.closeModal();
@@ -46,6 +47,22 @@ export class ClienteComponent {
     this.isLoggedIn = false;
     this.logout.emit();   // avisar al componente padre
   }
+
+  login() {
+    if (this.auth.login(this.username, this.password)) {
+      this.errorMessage = '';
+      //this.router.navigate(['/dashboard']); // redirige al dashboard
+      this.isLoggedIn = true;
+    } else {
+      this.errorMessage = 'Usuario o contraseña incorrectos';
+      const confirmacion = window.confirm(' Usuario o contraseña incorrecta');
+    }
+  }
+  logoutt() {
+    this.auth.logout();
+    this.router.navigate(['/cliente']);
+  }
+
 }
 
 

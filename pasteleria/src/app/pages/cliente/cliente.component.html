@@ -23,7 +23,7 @@
              [(ngModel)]="password"
              class="login-input">
 
-      <button class="login-button" (click)="iniciarSesion()">Ingresar</button>
+      <button class="login-button" (click)="login()">Ingresar</button>
 
       <button type="submit" class="login-btn" (click)="irCrearCuenta()">Crear cuenta</button>
     </div>
@@ -33,8 +33,9 @@
       <button class="login-btn" [routerLink]="'/perfil'" (click)="closeModal()">Mi perfil</button>
       <button class="login-btn" [routerLink]="'/pedidos'" (click)="closeModal()">Mis pedidos</button>
       <button class="login-btn" [routerLink]="'/puntos'" (click)="closeModal()">Puntos</button>
+      <button class="login-btn" [routerLink]="'/carrito'" (click)="closeModal()">Puntos</button>
 
-      <button class="login-button" (click)="cerrarSesion()">Cerrar sesión</button>
+      <button class="login-button" (click)="logoutt()">Cerrar sesión</button>
     </div>
 
   </div>
