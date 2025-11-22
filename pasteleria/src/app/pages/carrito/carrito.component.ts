@@ -5,8 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { Pedido } from '../../models/pedido';
 import {Producto}  from '../../models/producto';
 import { AuthService } from '../../services/auth.service';
-
+import { CarritoService } from '../../services/cart.service';
 import { Router } from '@angular/router';
+import { Item } from '../../models/item';
 
 @Component({
   selector: 'app-carrito',
@@ -15,13 +16,25 @@ import { Router } from '@angular/router';
   styleUrl: './carrito.component.scss'
 })
 export class CarritoComponent {
-  constructor(private router: Router, private auth: AuthService) {}
+  productosI: Item[] = [];
+  //total: number = 0;
+
+  constructor(private router: Router, private auth: AuthService, private carritoService: CarritoService) {}
   login=false;
   ngOnInit(){
     this.login=this.auth.isLoggedIn();
     console.log(this.login)
     if(this.login==false){this.router.navigate(['/cliente']);}
-   }
+
+    this.carritoService.carrito$.subscribe(items => {
+      this.productosI = items;    
+      this.total = this.carritoService.total(); 
+  });
+  }
+
+
+
+
   productosList = [
     { 
       id: 1,
@@ -105,30 +118,22 @@ export class CarritoComponent {
   cambiarPaso(p: number) {
     this.pasoActual = p;
   }
-
   
   total: number = 0;
 
-
-  
-
-  
-
-  eliminar(id : number){
-    this.productos = this.productos.filter(p => p.id !== id);
-    //window.location.reload();
-  }
-  calculaTotal(){
-    let total = 0;
-    for (let p of this.productos){
-      total += p.precio * p.cantidad;
-    }
-    this.total = Number(total.toFixed(2));  
-    console.log(this.pedido);
-    return Number(total.toFixed(2));  
-    
-  }
-
+  // eliminar(id : number){
+  //   this.productos = this.productos.filter(p => p.id !== id);
+  //   //window.location.reload();
+  // }
+  // calculaTotal(){
+  //   let total = 0;
+  //   for (let p of this.productos){
+  //     total += p.precio * p.cantidad;
+  //   }
+  //   //this.total = Number(total.toFixed(2));  
+  //   console.log(this.pedido);
+  //   return Number(total.toFixed(2));  
+  // }
 
   iniciarPago(){
     this.pedido.productos=this.productos;
@@ -195,5 +200,21 @@ export class CarritoComponent {
     this.pedido.status = "Pedido recibido";
     this.statusActivo = this.status.indexOf(this.pedido.status);
   }
+  eliminar(id: number) {
+  const confirmacion = window.confirm('¿Estás seguro de que quieres eliminar este producto del carrito?');
+  if (confirmacion) {
+    this.carritoService.quitarProducto(id);
+  }
+}
 
+incrementar(item: Item) {
+  this.carritoService.incrementar(item.id);
+}
+
+decrementar(item: Item) {
+  this.carritoService.decrementar(item.id);
+}
+  vaciar() {
+    this.carritoService.vaciarCarrito();
+  }
 }

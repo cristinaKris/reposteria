@@ -13,15 +13,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let p of productos">
+                <tr *ngFor="let p of productosI">
                     <td><img [src]="p.img" width="70"></td>
                     <td>{{p.nombre}}</td>
                     <td>{{p.precio | currency:'MXN'}}</td>
                     <td>
                         <div class="cantidad">
-                            <button (click)="p.decrementar()" [disabled]="p.cantidad === 0" class="btn-cantidad">-</button>
+                            <button (click)="decrementar(p)" [disabled]="p.cantidad === 0" class="btn-cantidad">-</button>
                                 {{p.cantidad}}
-                            <button (click)="p.incrementar()" class="btn-cantidad">+</button>
+                            <button (click)="incrementar(p)" class="btn-cantidad">+</button>
                         </div>
                         <button class="btn-eliminar" (click)="eliminar(p.id)">Eliminar</button>
                         
@@ -30,7 +30,7 @@
                 </tr>
             </tbody>
         </table>
-        <p> Total : {{calculaTotal()}}</p>
+        <p> Total : {{total}}</p>
     </div>
     <div class="botones">
         <button class="btn2">Aplicar Cupón</button>
@@ -184,7 +184,7 @@
           </tr>
         </tbody>
       </table>
-      <p> Total: {{calculaTotal()}}</p>
+      <p> Total: {{total}}</p>
     </div>
     <div>
       <h2>Método de entrega:</h2>
@@ -221,5 +221,3 @@
 </app-asistente-pasos>
 </div>
 </div>
-
-<div></div>

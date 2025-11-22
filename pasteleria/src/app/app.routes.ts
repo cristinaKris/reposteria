@@ -7,7 +7,6 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 import { PersonalizarPastelComponent } from './pages/catalogo/personalizar-pastel/personalizar-pastel.component';
 import { MiPerfilComponent } from './pages/cliente/mi-perfil/mi-perfil.component';
 import { AuthGuard } from './guards/auth.guard';
-import { ProductosComponent } from './pages/carrito/productos/productos.component';
 
 
 export const routes: Routes = [
@@ -55,9 +54,6 @@ export const routes: Routes = [
     import('./pages/cliente/puntos/puntos.component').then(
       (m) => m.PuntosComponent 
     ),
-    },
-    {
-     path: 'productos', component: ProductosComponent, canActivate: [AuthGuard]
     },
     {path: 'cliente', component: ClienteComponent, canActivate: [AuthGuard]},
     //{ path: 'personalizar-pastel', component: PersonalizarPastelComponent, },
