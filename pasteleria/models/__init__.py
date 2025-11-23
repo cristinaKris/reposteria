@@ -18,5 +18,7 @@ __all__ = [
     "DETALLE",
     "POSTRE",
     "TARTA",
-    "PAN"
+    "PAN", 
+    "PASTEL_ESTABLECIDO",
+    "PASTEL_PERSONALIZADO",
 ]

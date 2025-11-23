@@ -9,7 +9,7 @@ class DETALLE(models.Model):
     pedido = models.ForeignKey(PEDIDO, on_delete=models.CASCADE, related_name="detalles")
     producto = models.ForeignKey(PRODUCTO, on_delete=models.CASCADE, related_name="detalles")
 
-    cantidad = models.IntegerField()
+    cantidad = models.IntegerField(max_length=7, null=False, blank=False)
 
     @property
     def subtotal(self):     # CS5

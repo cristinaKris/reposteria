@@ -19,9 +19,9 @@ class PASTEL_ESTABLECIDO(models.Model):
         primary_key=True,
         limit_choices_to={"tipoPastel","ESTABLECIDO"}
     )
-    nombrePastel = models.CharField(max_length=50, null=True, blank=True)
-    descripcion = models.CharField(max_length=50, null=True, blank=True)
-    imagen = models.CharField(max_length=255, null=True, blank=True)
+    nombrePastel = models.CharField(max_length=50, null=False, blank=False, unique=True)
+    descripcion = models.CharField(max_length=50, null=True, blank=True, default="Sin descripción")
+    imagen = models.CharField(max_length=255, null=True, blank=True, default="Sin imagen")
     def __str__(self):
         return f"Pastel Establecido ({self.idEstablecido})"
 
@@ -34,16 +34,16 @@ class PASTEL_PERSONALIZADO(models.Model):
     TIPO_RELLENO = (("DURAZNO", "durazno con nuez"),
                ("ALMENDRA", "crema de almendras"),
                (("GANACHE", "ganache de Belga")))
-    relleno = models.CharField(max_length=20, choices=TIPO_RELLENO)
+    relleno = models.CharField(max_length=20, choices=TIPO_RELLENO, null=False, blank=False)
     TIPO_TAMANO = (("CHICO", "chico"),
               ("MEDIANO", "mediano"),
               ("GRANDE","grande"))
-    tamano = models.CharField(max_length=20, choices=TIPO_TAMANO)
+    tamano = models.CharField(max_length=20, choices=TIPO_TAMANO, null=False, blank=False)
     TIPO_DECORACION = (("FLORES", "flores naturales comestibles"),
                   ("FONDANT", "fondant"),
                   ("FRUTA", "fruta"))
-    decoracion = models.CharField(max_length=20,choices=TIPO_DECORACION)
+    decoracion = models.CharField(max_length=20,choices=TIPO_DECORACION, null=False, blank=False)
     TIPO_SABOR = (("CHOCOLATE", "chocolate"),
              ("VAINILLA", "vainilla"),
              ("MATCHA", "matcha"))
-    sabor = models.CharField(max_length=20, choices=TIPO_SABOR)
+    sabor = models.CharField(max_length=20, choices=TIPO_SABOR, null=False, blank=False)
