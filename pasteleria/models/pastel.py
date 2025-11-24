@@ -1,5 +1,6 @@
 from django.db import models
 from .producto import PRODUCTO
+from .extras import EXTRA
 class PASTEL(models.Model):
     idPastel = models.OneToOneField(
         PRODUCTO,
@@ -19,9 +20,9 @@ class PASTEL_ESTABLECIDO(models.Model):
         primary_key=True,
         limit_choices_to={"tipoPastel","ESTABLECIDO"}
     )
-    nombrePastel = models.CharField(max_length=50, null=True, blank=True)
-    descripcion = models.CharField(max_length=50, null=True, blank=True)
-    imagen = models.CharField(max_length=255, null=True, blank=True)
+    nombrePastel = models.CharField(max_length=50, null=False, blank=False, unique=True)
+    descripcion = models.CharField(max_length=50, null=True, blank=True, default="Sin descripción")
+    imagen = models.CharField(max_length=255, null=True, blank=True, default="Sin imagen")
     def __str__(self):
         return f"Pastel Establecido ({self.idEstablecido})"
 
@@ -31,19 +32,6 @@ class PASTEL_PERSONALIZADO(models.Model):
         primary_key= True,
         limit_choices_to={"tipoPastel","PERSONALIZADO"}
     )
-    TIPO_RELLENO = (("DURAZNO", "durazno con nuez"),
-               ("ALMENDRA", "crema de almendras"),
-               (("GANACHE", "ganache de Belga")))
-    relleno = models.CharField(max_length=20, choices=TIPO_RELLENO)
-    TIPO_TAMANO = (("CHICO", "chico"),
-              ("MEDIANO", "mediano"),
-              ("GRANDE","grande"))
-    tamano = models.CharField(max_length=20, choices=TIPO_TAMANO)
-    TIPO_DECORACION = (("FLORES", "flores naturales comestibles"),
-                  ("FONDANT", "fondant"),
-                  ("FRUTA", "fruta"))
-    decoracion = models.CharField(max_length=20,choices=TIPO_DECORACION)
-    TIPO_SABOR = (("CHOCOLATE", "chocolate"),
-             ("VAINILLA", "vainilla"),
-             ("MATCHA", "matcha"))
-    sabor = models.CharField(max_length=20, choices=TIPO_SABOR)
+    extras = models.ManyToManyField(EXTRA, related_name="pasteles_personalizados", blank=False, null=False)
+    def __str__(self):
+        return f"Pastel Personalizado ({self.idPersonalizado})"

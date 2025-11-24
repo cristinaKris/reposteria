@@ -11,10 +11,10 @@ class PRODUCTO(models.Model):
 
     idProducto = models.AutoField(primary_key=True)
     stock = models.IntegerField(default=0)
-    precioUnitario = models.DecimalField(max_digits=10, decimal_places=2)
+    precioUnitario = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
 
     # ← GENERALIZACIÓN: tipo de producto, no más tablas
-    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
+    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES, null=False, blank=False)
 
     promocion = models.OneToOneField(
     PROMOCION,
