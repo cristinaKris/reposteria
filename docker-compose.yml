@@ -16,19 +16,6 @@ services:
     networks:
       - reposteria_net
 
-  nginx:
-    image: nginx:latest
-    container_name: reposteria_nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./pasteleria/dist/pasteleria:/usr/share/nginx/html
-    depends_on:
-      - django
-    networks:
-      - reposteria_net
-
   django:
     build: ./django_app
     container_name: django_pasteleria
@@ -44,6 +31,31 @@ services:
       DB_PASSWORD: admin
       DB_HOST: postgres_db
       DB_PORT: 5432
+    networks:
+      - reposteria_net
+
+  angular_build:
+    build: ./pasteleria
+    container_name: angular_builder
+    volumes:
+      - ./pasteleria/dist/pasteleria/browser:/out
+    networks:
+      - reposteria_net
+
+  nginx:
+    image: nginx:latest
+    container_name: reposteria_nginx
+    depends_on:
+      - django
+      - angular_build
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./pasteleria/dist/pasteleria/browser:/usr/share/nginx/html
+    networks:
+      - reposteria_net
+
 networks:
   reposteria_net:
 
