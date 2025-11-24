@@ -18,7 +18,7 @@ class PASTEL_ESTABLECIDO(models.Model):
     idEstablecido = models.OneToOneField(
         PASTEL,on_delete=models.CASCADE,
         primary_key=True,
-        limit_choices_to={"tipoPastel","ESTABLECIDO"}
+        limit_choices_to={"tipoPastel":"ESTABLECIDO"}
     )
     nombrePastel = models.CharField(max_length=50, null=False, blank=False, unique=True)
     descripcion = models.CharField(max_length=255, null=True, blank=True, default="Sin descripción")
@@ -30,7 +30,7 @@ class PASTEL_PERSONALIZADO(models.Model):
     idPersonalizado = models.OneToOneField(
         PASTEL, on_delete=models.CASCADE,
         primary_key= True,
-        limit_choices_to={"tipoPastel","PERSONALIZADO"}
+        limit_choices_to={"tipoPastel":"PERSONALIZADO"}
     )
     extras = models.ManyToManyField(EXTRA, related_name="pasteles_personalizados", blank=False)
     def __str__(self):

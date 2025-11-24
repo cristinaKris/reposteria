@@ -28,6 +28,6 @@ class PEDIDO(models.Model):
         ("CANCELADO", "Cancelado"),  # CS1
     )
     status = models.CharField(max_length=20, choices=STATUS, null=False, blank=False, default="RECIBIDO")
-
+    productos = models.ManyToManyField(PRODUCTO, through='DETALLE', related_name='pedidos')
     def __str__(self):
         return f"Pedido {self.idPedido} ({self.usuario.nombres})"
