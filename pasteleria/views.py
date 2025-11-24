@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods
 import json
 from .models import PRODUCTO,PAN, TARTA, POSTRE, PASTEL, PASTEL_ESTABLECIDO, PASTEL_PERSONALIZADO
 from .models import USUARIO
-
+from .models import DETALLE, PEDIDO, PRODUCTO
 
 TIPOS = {
      "PAN": PAN,
@@ -111,3 +111,91 @@ def login_view(request):
 
     except Exception as e:
         return JsonResponse({'success': False, 'message': str(e)}, status=400)
+
+#Crear pedido con nulos
+
+@csrf_exempt
+def crear_pedido(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        usuario_id = data.get('usuario')  
+
+        try:
+            usuario = USUARIO.objects.get(idUsuario=usuario_id)
+        except USUARIO.DoesNotExist:
+            return JsonResponse({"error": "Usuario no existe"}, status=404)
+
+        pedido = PEDIDO.objects.create(
+            usuario=usuario,
+            fechaEntrega=data.get('fechaEntrega', None),
+            horaEntrega=data.get('horaEntrega', None),
+            total=data.get('total', 0),
+            calificacion=data.get('calificacion', 0),
+            tipoEntrega=data.get('tipoEntrega', 'PICKUP'),
+            formaPago=data.get('formaPago', 'MERCADOPAGO'),
+            status=data.get('status', 'RECIBIDO'),
+        )
+
+        return JsonResponse({"idPedido": pedido.idPedido}, status=201)
+
+
+
+@csrf_exempt
+def modificar_pedido(request, id):
+    try:
+        pedido = PEDIDO.objects.get(idPedido = id)
+    except PEDIDO.DoesNotExist:
+        return JsonResponse({"error":"Pedido no existe"})
+    
+    if request.method in ['PUT','PATCH'] :  
+        data = json.loads(request.body)
+        
+        campos_obligatorios = ['fechaEntrega', 'horaEntrega', 'total', 'calificacion', 'tipoEntrega', 'formaPago', 'status']
+            
+        pedido.fechaEntrega =data.get('fechaEntrega', pedido.fechaEntrega)
+        pedido.horaEntrega = data.get('horaEntrega', pedido.horaEntrega)       
+        pedido.total = data.get('total', pedido.total)
+        pedido.calificacion = data.get('calificacion', pedido.calificacion)
+        pedido.tipoEntrega = data.get('tipoEntrega', pedido.tipoEntrega)
+        pedido.formaPago = data.get('formaPago', pedido.formaPago)
+        pedido.status = data.get('status', pedido.status)
+        pedido.save()
+
+        return JsonResponse({"idPedido": pedido.idPedido}, status=200)
+    
+    
+@csrf_exempt
+def crear_detalle(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        pedido_id = data.get('pedido')  
+        productos = data.get('productos', [])
+
+        carrito = []
+
+        try:
+            pedido = PEDIDO.objects.get(idPedido=pedido_id)
+        except PEDIDO.DoesNotExist:
+            return JsonResponse({"error": "Pedido no existe"}, status=404)
+        
+        for p in productos:
+            try:
+                producto = PRODUCTO.objects.get(idProducto=p['idProducto'])
+            except PRODUCTO.DoesNotExist:
+                continue  
+
+            detalle = DETALLE.objects.create(
+                pedido = pedido,  
+                producto = producto,
+                cantidad = p['cantidad']
+            )
+
+            carrito.append({
+                "idItem": detalle.idItem,
+                "pedido": detalle.pedido.idPedido,
+                "producto": detalle.producto.idProducto,
+                "cantidad": detalle.cantidad,
+                "subtotal": float(detalle.subtotal)
+            })
+
+        return JsonResponse(carrito, safe=False, status=201)
