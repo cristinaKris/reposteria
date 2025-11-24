@@ -20,6 +20,9 @@ from pasteleria.views import productos_tipo
 from pasteleria.views import login_view
 from pasteleria.views import crear_detalle
 from pasteleria.views import crear_pedido, modificar_pedido
+from pasteleria.views import crear_PastelP
+from pasteleria.views import get_extras_tipo
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/<str:tipo>/', productos_tipo, name="productos_tipo"), 
@@ -29,4 +32,6 @@ urlpatterns = [
     path('pedidos/', crear_pedido, name='crear-pedido'),       
     path('pedidos/<int:id>/', modificar_pedido, name='modificar-pedido'), 
     path('detalles/', crear_detalle, name='crear_detalle'),
+    path('personalizado/', crear_PastelP, name = "crear_PastelP"),
+    path('extras/', get_extras_tipo, name ="getExtras" )
 ]

@@ -5,7 +5,7 @@ import json
 from .models import PRODUCTO,PAN, TARTA, POSTRE, PASTEL, PASTEL_ESTABLECIDO, PASTEL_PERSONALIZADO
 from .models import USUARIO
 from .models import DETALLE, PEDIDO, PRODUCTO
-
+from .models import EXTRA
 TIPOS = {
      "PAN": PAN,
     "TARTA": TARTA,
@@ -199,3 +199,68 @@ def crear_detalle(request):
             })
 
         return JsonResponse(carrito, safe=False, status=201)
+
+@csrf_exempt
+def crear_PastelP(request):
+    if request.method == "POST":
+        data= json.loads(request.body)
+        stock = 1
+        precio = data.get("precio")
+        extras_ids = data.get ("extras", [])
+    
+        producto = PRODUCTO.objects.create(
+            stock = stock,
+            precioUnitario = precio,
+            tipo = "PASTEL"
+        )  
+        
+        pastel = PASTEL.objects.create(
+            idPastel = producto,
+            tipoPastel = "PERSONALIZADO "
+        ) 
+        
+        pastel_personalizado = PASTEL_PERSONALIZADO.objects.create (
+            idPersonalizado = pastel,
+        ) 
+        
+        extras = EXTRA.objects.filter(idExtra = extras_ids)
+        pastel_personalizado.extras.set(extras)
+        
+        response_data = {
+            "idProducto": producto.idProducto,
+            "stock": producto.stock,
+            "precioUnitario": str(producto.precioUnitario),
+            "tipo": producto.tipo,
+            "pastel": {
+                "idPastel": pastel.idPastel.idProducto,
+                "tipoPastel": pastel.tipoPastel,
+                "pastel_personalizado": {
+                    "idPersonalizado": pastel_personalizado.idPersonalizado.idPastel.idProducto,
+                    "extras": list(extras.values("id", "nombre"))
+                }
+            }
+        }
+        
+        return JsonResponse(response_data, status=201)
+    return JsonResponse({"error": "No se logró crear"}, status=400)
+    
+@csrf_exempt
+def get_extras_tipo(request, tipo):
+    tipos_validos = [t[0] for t in EXTRA.TIPOS_EXTRA]
+    if tipo not in tipos_validos:
+        return JsonResponse({"error": "Tipo inválido"}, status=400)
+
+    extras = EXTRA.objects.filter(tipoExtra=tipo)
+    resultado = [
+        {
+            "idExtra": extra.idExtra,
+            "nombreExtra": extra.nombreExtra,
+            "price": float(extra.price)
+        } for extra in extras
+    ]
+    return JsonResponse({tipo: resultado}, safe=True)
+
+        
+
+
+
