@@ -4,6 +4,7 @@ import { timeout } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatDialog,MatDialogRef } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
+import { Pastel } from '../../../models/pastel.model';
 
 @Component({
   selector: 'app-personalizar-pastel',
@@ -13,6 +14,12 @@ import { DialogRef } from '@angular/cdk/dialog';
 })
 export class PersonalizarPastelComponent {
   constructor(private dialogRef: MatDialogRef<PersonalizarPastelComponent>){}
+  pastel = new Pastel(
+    '',        // size
+    '',         // relleno
+    '',     // sabor
+    ''         // decoracion
+  );
   pasos =[
     {valor: 1, titulo:"Tamaño"},
     {valor: 2, titulo:"Sabor"},
@@ -33,26 +40,34 @@ export class PersonalizarPastelComponent {
     this.pasoActual = p;
   }
   onClose(){
+    this.pasoActual = 1; 
+    this.pastel = undefined as any; 
     this.dialogRef.close();
   }
 
   size(size:string){
-      this.cambiarPaso(2);
+    this.pastel.size=size;
+    this.cambiarPaso(2);
   }
   
   sabor(sabor:string){
+    this.pastel.sabor = sabor;
     this.cambiarPaso(3);
   }
 
   relleno(relleno:string){
+    this.pastel.relleno=relleno;
     this.cambiarPaso(4);
   }
 
   decoracion(deco:string){
+    this.pastel.decoracion=deco;
     this.cambiarPaso(5);
   }
 
   finalizar(){
+    alert('¡Pedido confirmado!');
+
     this.dialogRef.close();
   }
 

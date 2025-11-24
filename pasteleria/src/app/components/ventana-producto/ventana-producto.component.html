@@ -20,5 +20,5 @@ Se usa como
     <img [src]="image" alt="{{name}}" class="photo"/>
     <p class="description">{{description}}</p>
     <p class="price">Price: {{price}}</p>
-    <button class="add-btn">Add</button>
+    <button (click)="addToCart()" class="add-btn">Add</button>
 </div>

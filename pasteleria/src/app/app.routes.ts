@@ -6,6 +6,7 @@ import { ClienteComponent } from './pages/cliente/cliente.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { PersonalizarPastelComponent } from './pages/catalogo/personalizar-pastel/personalizar-pastel.component';
 import { MiPerfilComponent } from './pages/cliente/mi-perfil/mi-perfil.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -54,10 +55,9 @@ export const routes: Routes = [
       (m) => m.PuntosComponent 
     ),
     },
-
-    {path: 'cliente', component: ClienteComponent},
+    {path: 'cliente', component: ClienteComponent, canActivate: [AuthGuard]},
     //{ path: 'personalizar-pastel', component: PersonalizarPastelComponent, },
-    {path: 'carrito', component: CarritoComponent},
+    {path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard]},
     {path: '**', redirectTo: '/home'}
 
 

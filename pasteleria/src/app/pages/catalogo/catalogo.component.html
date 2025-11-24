@@ -13,9 +13,12 @@
 </div>
 
 <h1>Tartas</h1>
+
 <app-carrousel>
   <div slideItem *ngFor="let tarta of tartas">
     <app-product-card
+      [id] = "tarta.id"
+      [type] = "1"
       [name]="tarta.name"
       [price]="tarta.price"
       [descripcion]="tarta.description"
@@ -29,6 +32,8 @@
 <app-carrousel>
   <div slideItem *ngFor="let pan of panes">
     <app-product-card
+      [id] = "pan.id"
+      [type] = "2"
       [name] = "pan.name"
       [descripcion] = "pan.description"
       [price] = "pan.price"
@@ -43,7 +48,9 @@
 <app-carrousel>
   <div slideItem *ngFor="let postre of postres">
     <app-product-card
-      [name]="postre.name"
+      [id] = "postre.id"
+      [type] = "2"
+      [name] = "postre.name"
       [descripcion] = "postre.description"
       [price] = "postre.price"
       [imagen] = "postre.imagen"
@@ -62,6 +69,8 @@
 <app-carrousel>
   <div slideItem *ngFor="let pastel of pasteles">
     <app-product-card
+      [id] = "pastel.id"
+      [type] = "4"
       [name] = "pastel.name"
       [descripcion] = "pastel.description"
       [price] = "pastel.price"
