@@ -9,6 +9,7 @@ from .tarta import TARTA
 from .postre import POSTRE
 from .pastel import PASTEL_ESTABLECIDO
 from .pastel import PASTEL_PERSONALIZADO
+from .extras import EXTRA
 __all__ = [
     "USUARIO",
     "PRODUCTO",
@@ -21,4 +22,5 @@ __all__ = [
     "PAN", 
     "PASTEL_ESTABLECIDO",
     "PASTEL_PERSONALIZADO",
+    "EXTRA",
 ]
