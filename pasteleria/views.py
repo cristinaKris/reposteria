@@ -3,6 +3,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 import json
 from .models import PRODUCTO,PAN, TARTA, POSTRE, PASTEL, PASTEL_ESTABLECIDO, PASTEL_PERSONALIZADO
+from .models import USUARIO
+
 
 TIPOS = {
      "PAN": PAN,
@@ -78,3 +80,34 @@ def productos_tipo(request, tipo):
 #         except PASTEL_ESTABLECIDO.DoesNotExist:
 #             pass
 #     return JsonResponse(data, safe=False)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def login_view(request):
+    try:
+        data = json.loads(request.body)
+        correo = data.get('correo')
+        contraseña = data.get('contraseña')
+
+        usuario = USUARIO.objects.filter(correo=correo, contraseña=contraseña).first()
+
+        if usuario:
+            return JsonResponse({
+                'success': True,
+                'message': 'Login exitoso',
+                'usuario': {
+                    'id': usuario.idUsuario,
+                    'nombre': usuario.nombres,
+                    'apellidoP': usuario.apellidoP,
+                    'apellidoM': usuario.apellidoM,
+                    'correo': usuario.correo,
+                    'edad': usuario.edad,
+                    'saldoEqui': usuario.saldoEqui,
+                    'puntosReco': usuario.puntosReco
+                }
+            })
+        else:
+            return JsonResponse({'success': False, 'message': 'Credenciales incorrectas'}, status=401)
+
+    except Exception as e:
+        return JsonResponse({'success': False, 'message': str(e)}, status=400)

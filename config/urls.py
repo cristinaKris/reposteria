@@ -17,10 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from pasteleria.views import productos_tipo
+from pasteleria.views import login_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/<str:tipo>/', productos_tipo, name="productos_tipo"), 
     #path("pasteles/", get_pasteles, name="get_pasteles")
+    path('api/login/', login_view, name='login'),
 ]
