@@ -1,38 +1,42 @@
 <div class="registro-container">
 
+<div class="registro-container">
+
   <h1>Datos Personales</h1>
 
   <div class="form-grid">
+    
     <div class="form-group">
       <label>Nombre(s)</label>
-      <input type="text" placeholder="Ingresa tu(s) nombre(s)">
+      <input type="text" [value]="datosCliente.nombre" disabled>
     </div>
 
     <div class="form-group">
       <label>Apellido(s)</label>
-      <input type="text" placeholder="Ingresa tu(s) apellido(s)">
+      <input type="text" [value]="datosCliente.apellidos" disabled>
     </div>
 
     <div class="form-group">
       <label>Correo</label>
-      <input type="email" placeholder="correo@correo.com">
+      <input type="email" [value]="datosCliente.correo" disabled>
     </div>
 
     <div class="form-group">
       <label>Celular</label>
-      <input type="text" placeholder="00000000">
+      <input type="text" [value]="datosCliente.celular" disabled>
     </div>
 
     <div class="form-group form-full">
       <label>Fecha Nacimiento</label>
-      <input type="date">
+      <input type="date" [value]="datosCliente.fechaNacimiento" disabled>
     </div>
 
     <div class="form-group form-full">
       <label>Dirección Entrega</label>
-      <input type="text" placeholder="Ingresa tu direccion">
+      <input type="text" [value]="datosCliente.direccion" disabled>
     </div>
 
   </div>
+
   <button class="btn-crear" [routerLink]="'/actualizar'">MODIFICAR DATOS</button>
 </div>

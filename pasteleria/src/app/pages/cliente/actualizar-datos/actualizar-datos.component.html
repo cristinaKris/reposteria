@@ -3,38 +3,40 @@
   <h1>Actualizar Datos</h1>
 
   <div class="form-grid">
+
     <div class="form-group">
       <label>Nombre(s)</label>
-      <input type="text" placeholder="Ingresa tu(s) nombre(s)">
+      <input type="text" [(ngModel)]="datosEditados.nombre">
     </div>
 
     <div class="form-group">
       <label>Apellido(s)</label>
-      <input type="text" placeholder="Ingresa tu(s) apellido(s)">
+      <input type="text" [(ngModel)]="datosEditados.apellidos">
     </div>
 
     <div class="form-group">
       <label>Correo</label>
-      <input type="email" placeholder="correo@correo.com">
+      <input type="email" [(ngModel)]="datosEditados.correo">
     </div>
 
     <div class="form-group">
       <label>Celular</label>
-      <input type="text" placeholder="00000000">
+      <input type="text" [(ngModel)]="datosEditados.celular">
     </div>
 
     <div class="form-group form-full">
       <label>Fecha Nacimiento</label>
-      <input type="date">
+      <input type="date" [(ngModel)]="datosEditados.fechaNacimiento">
     </div>
 
     <div class="form-group form-full">
       <label>Dirección Entrega</label>
-      <input type="text" placeholder="Ingresa tu direccion">
+      <input type="text" [(ngModel)]="datosEditados.direccion">
     </div>
 
   </div>
 
-  <button class="btn-crear">MODIFICAR DATOS</button>
+  <button class="btn-crear" (click)="modificarDatos()">MODIFICAR DATOS</button>
 
 </div>
+

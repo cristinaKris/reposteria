@@ -9,5 +9,14 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./mi-perfil.component.scss']
 })
 export class MiPerfilComponent {
+datosCliente = {
+  nombre: "Maria Geovana",
+  apellidos: "Garcia Luna",
+  correo: "geoevama@gmail.com",
+  celular: "5566717190",
+  fechaNacimiento: "1997-07-02",
+  direccion: "Calle Vírgenes 405, 07865, COL. PEDREGAL, CDMX"
+};
 
 }
+
