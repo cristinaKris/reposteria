@@ -6,12 +6,18 @@ from .models import (
     PAN, PASTEL_ESTABLECIDO, PASTEL_PERSONALIZADO,
     EXTRA
 )
-
+class DetalleInline(admin.TabularInline):
+    model = DETALLE
+    extra = 1  # Esto crea una fila vacía por defecto para agregar productos a un pedido
 admin.site.register(USUARIO)
 admin.site.register(PASTEL)
 admin.site.register(PROMOCION)
 admin.site.register(PEDIDO)
-admin.site.register(DETALLE)
+@admin.register(DETALLE)
+class DetalleAdmin(admin.ModelAdmin):
+    list_display = ("pedido", "producto", "cantidad", "subtotal")
+    list_filter = ("pedido", "producto")
+    search_fields = ("pedido", "producto")
 @admin.register(PASTEL_PERSONALIZADO)
 class PastelPersonalizadoAdmin(admin.ModelAdmin):
     list_display = ("idPersonalizado",)  # Mostrar solo el id (se puede agregar más si es necesario)
