@@ -19,4 +19,4 @@ class DETALLE(models.Model):
         return self.producto.precioUnitario * self.cantidad
 
     def __str__(self):
-        return f"Item ({self.pedido.id} - {self.producto.tipo})"
+        return f"Item ({self.pedido} - {self.producto.tipo})"
